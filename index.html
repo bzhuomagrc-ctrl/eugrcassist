@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU GRC Assist GPT</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: #fefbf6;
+            color: #1a1a1a;
+            line-height: 1.5;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0a0a0a;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #8b6f47;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem 0;
+            color: #0f172a;
+            border-bottom: 2px solid #ea580c;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem 0;
+            color: #1e293b;
+        }
+
+        p {
+            margin-bottom: 0.75rem;
+            color: #334155;
+        }
+
+        ul {
+            margin: 0.5rem 0 1rem 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+            color: #475569;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .sticky-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .cta-button {
+            display: block;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(234, 88, 12, 0.3);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .instruction-box {
+            background: white;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #ea580c;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .instruction-summary {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .audit-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: white;
+            color: #ea580c;
+            border: 1px solid #ea580c;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .audit-button:hover {
+            background: #ea580c;
+            color: white;
+        }
+
+        .disclaimer-box {
+            background: #f5f5f0;
+            border: 1px solid #d4d4d0;
+            border-left: 4px solid #78716c;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .disclaimer-box h3 {
+            margin-top: 0;
+            font-size: 0.95rem;
+            color: #44403c;
+        }
+
+        .disclaimer-box p {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #57534e;
+        }
+
+        .disclaimer-box ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .disclaimer-box li {
+            color: #57534e;
+        }
+
+        .compact-list {
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .compact-list li {
+            break-inside: avoid;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .spec-card {
+            background: white;
+            border: 1px solid #fed7aa;
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .spec-card:hover {
+            border-color: #ea580c;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15);
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: #92400e;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0f172a;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        .community-card {
+            background: white;
+            border: 1px solid #fed7aa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .community-card p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        .community-button {
+            display: inline-block;
+            padding: 0.65rem 1.25rem;
+            background: white;
+            color: #ea580c;
+            border: 1px solid #ea580c;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .community-button:hover {
+            background: #ea580c;
+            color: white;
+        }
+
+        .experiment-box {
+            background: white;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #f97316;
+            padding: 1.5rem;
+            margin: 1.5rem 0 2rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .experiment-box h3 {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #1e293b;
+        }
+
+        .experiment-box h3:first-child {
+            margin-top: 0;
+        }
+
+        .experiment-box p {
+            font-size: 0.875rem;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        .experiment-box ul {
+            margin: 0.75rem 0 1rem 1.5rem;
+        }
+
+        .experiment-box li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .two-column,
+            .compact-list,
+            .specs-grid,
+            .community-grid {
+                columns: 1;
+                grid-template-columns: 1fr;
+            }
+
+            .sticky-cta {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>EU GRC Assist</h1>
+        <p class="subtitle">Quick GRC assistant for learners and Risk & Compliance professionals</p>
+
+        <div class="specs-grid">
+            <div class="spec-card">
+                <div class="spec-label">Jurisdiction</div>
+                <div class="spec-value">Netherlands + EU</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Industries</div>
+                <div class="spec-value">Banking, Payments, Fintech</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Regulators</div>
+                <div class="spec-value">DNB & AFM</div>
+            </div>
+        </div>
+
+        <h2>How This GPT Works</h2>
+
+        <div class="instruction-box">
+            <h3 style="margin-top: 0;">GPT Instruction Summary</h3>
+            <div class="instruction-summary">
+                <p><strong>Core Purpose:</strong> EU GRC Assist is a governance reasoning engine (not a knowledge tool) designed to support IAPP AIGP exam prep and translate EU regulatory obligations into draft controls for risk professionals.</p>
+                
+                <p><strong>Operating Model:</strong> Uses mandatory governance reasoning flow—classifying entity type, regulatory perimeter, AI risk tier, supervisory expectations, and proportionality level before responding. Treats EBA Internal Governance Guidelines as baseline for banking/payments/insurance.</p>
+                
+                <p><strong>Source Discipline:</strong> Only uses uploaded regulatory documents as authoritative sources. Must cite regulation name, article/section, and short excerpt. States "Insufficient coverage" when sources lack clarity.</p>
+                
+                <p><strong>Control Design:</strong> Outputs structured, auditable controls with mandatory template including: control objective, regulatory reference, risk addressed, control type, frequency, owner, and evidence. Includes supervisory challenge anticipation and control maturity self-assessment.</p>
+                
+                <p><strong>Boundaries:</strong> Does not provide legal advice, approve compliance, or replace human judgment. All outputs are drafts requiring professional review.</p>
+            </div>
+            <a href="#" class="audit-button" onclick="alert('Full instruction document:\n\nEU GRC Assist — System Instruction (Governance Reasoning Embedded)\n\nRole & Purpose: Private EU AI governance and GRC learning assistant for risk & compliance professionals in EU-regulated environments, focused on Netherlands.\n\nKey Features:\n• IAPP AIGP exam preparation support\n• Translates EU regulatory obligations into structured draft controls\n• Risk-based reasoning and governance design\n• Supervisory perspective simulation\n\nMandatory Governance Reasoning Flow:\n1. Entity classification (Bank/Fintech/Insurer/Platform)\n2. Regulatory perimeter determination\n3. AI risk tier assessment (Prohibited/High/Limited/Minimal/GPAI)\n4. Supervisory expectation strength\n5. Proportionality level\n\nRegulatory Source Rules:\n• Only uploaded documents are authoritative\n• Mandatory citation with regulation name, article, excerpt\n• Insufficient coverage explicitly stated\n• Every response ends with disclaimer\n\nControl Design Requirements:\n• Structured template format\n• Regulatory reference required\n• Preventive/detective controls\n• Defined ownership and evidence\n• Supervisory challenge anticipation\n• Control maturity self-assessment\n\nJurisdictional Scope:\n• Primary: EU (focus Netherlands)\n• Sectors: Banking, Payments, Fintech, Insurance, Digital platforms\n• Regulators: DNB, AFM, EBA, EIOPA\n\nDesign Philosophy:\n• Regulatory humility\n• Explicit acknowledgment of evolving guidance\n• Support thinking, not replace it\n• Conservative interpretations preferred\n\nDisclaimer: Learning tool only, not legal advice. Human judgment and legal review required.'); return false;">Audit Full Instruction →</a>
+        </div>
+
+        <h2>Legal & Regulatory References</h2>
+
+        <div class="two-column">
+            <div>
+                <h3>EU Directives & Regulations</h3>
+                <ul style="font-size: 0.85rem;">
+                    <li><strong>PSD2/PSD3</strong> — Payment services, open banking</li>
+                    <li><strong>GDPR</strong> — Data protection and privacy</li>
+                    <li><strong>DORA</strong> — ICT risk management for financial entities</li>
+                    <li><strong>MiCA</strong> — Crypto asset service providers</li>
+                    <li><strong>NIS2</strong> — Cybersecurity requirements</li>
+                    <li><strong>EU AI Act</strong> — AI systems risk classification</li>
+                    <li><strong>AML Directives</strong> (4th, 5th, 6th) — Anti-money laundering</li>
+                    <li><strong>CRD/CRR</strong> — Capital requirements for banks</li>
+                    <li><strong>DSA</strong> — Digital Services Act for platforms</li>
+                </ul>
+
+                <h3>Dutch Regulations</h3>
+                <ul style="font-size: 0.85rem;">
+                    <li><strong>Wft</strong> — Financial Supervision Act</li>
+                    <li><strong>Bgfo</strong> — Conduct Supervision Decree</li>
+                    <li><strong>Bpr</strong> — Prudential Rules Decree</li>
+                    <li><strong>Wwft</strong> — AML/CFT Act</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Supervisory Standards</h3>
+                <ul style="font-size: 0.85rem;">
+                    <li><strong>EBA Guidelines</strong> — Internal Governance, ICT Risk, Outsourcing</li>
+                    <li><strong>EIOPA Guidelines</strong> — Insurance governance</li>
+                    <li><strong>ESMA Guidelines</strong> — Securities market conduct</li>
+                    <li><strong>DNB Expectations</strong> — Operational resilience, model risk</li>
+                    <li><strong>AFM Guidance</strong> — Consumer protection, conduct</li>
+                </ul>
+
+                <h3>Supervisory Authorities</h3>
+                <ul style="font-size: 0.85rem;">
+                    <li><strong>DNB</strong> — Prudential supervision</li>
+                    <li><strong>AFM</strong> — Conduct supervision</li>
+                    <li><strong>EBA</strong> — European Banking Authority</li>
+                    <li><strong>EIOPA</strong> — European Insurance Authority</li>
+                    <li><strong>ESMA</strong> — European Securities Authority</li>
+                </ul>
+
+                <h3>International Frameworks</h3>
+                <ul style="font-size: 0.85rem;">
+                    <li><strong>ISO 27001</strong> — Information security</li>
+                    <li><strong>NIST</strong> — Cybersecurity framework</li>
+                    <li><strong>COBIT</strong> — IT governance</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Target Industries</h2>
+        <ul class="compact-list" style="font-size: 0.85rem;">
+            <li><strong>Banks</strong> — Commercial, retail, private banks</li>
+            <li><strong>Payment Institutions</strong> — Licensed PSPs under PSD2/PSD3</li>
+            <li><strong>E-Money Institutions</strong> — Electronic money issuers</li>
+            <li><strong>Digital Banks</strong> — Neobanks and challenger banks</li>
+            <li><strong>Fintech Companies</strong> — Financial technology firms offering regulated services</li>
+            <li><strong>Crypto Service Providers</strong> — Entities subject to MiCA</li>
+            <li><strong>Payment Service Providers</strong> — PSPs, acquirers, gateways</li>
+            <li><strong>Insurance Companies</strong> — Life, non-life, reinsurance</li>
+            <li><strong>Digital Platforms</strong> — Large platforms with AI exposure under DSA/AI Act</li>
+        </ul>
+
+        <h2>What You Can Ask</h2>
+        <ul style="font-size: 0.85rem;">
+            <li>"What are DNB's requirements for operational resilience in payment institutions?"</li>
+            <li>"Design controls for DORA ICT risk management in a Dutch digital bank"</li>
+            <li>"What controls are needed for PSD2 strong customer authentication?"</li>
+            <li>"Help me structure a three lines of defense model for fintech"</li>
+            <li>"Review this incident response policy for DORA compliance"</li>
+            <li>"What are the MiCA requirements for crypto exchanges in Netherlands?"</li>
+            <li>"Explain AI Act high-risk classification for credit scoring systems"</li>
+            <li>"Map EBA Internal Governance Guidelines to our risk management framework"</li>
+            <li>"Design a control template for AI model risk management"</li>
+            <li>"What evidence would DNB request in an operational resilience audit?"</li>
+        </ul>
+
+        <div class="disclaimer-box">
+            <h3>⚠️ Important Disclaimer</h3>
+            <p><strong>This is NOT legal advice.</strong> EU GRC Assist is a learning tool and governance reasoning assistant designed to support professional judgment—not replace it.</p>
+            <p style="margin-top: 0.75rem;"><strong>Always:</strong></p>
+            <ul style="font-size: 0.85rem;">
+                <li>Verify information with official regulatory sources (DNB, AFM, EBA, EU Official Journal)</li>
+                <li>Consult qualified legal and compliance professionals for advice</li>
+                <li>Check for the most current regulations, technical standards, and supervisory guidance</li>
+                <li>Apply professional judgment and risk-based reasoning to your specific circumstances</li>
+                <li>Subject all GPT outputs to human review, second-line challenge, and legal sign-off</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-weight: 600;">EU GRC Assist does not approve compliance, provide regulatory assurance, or replace management responsibility.</p>
+        </div>
+
+        <h2>About This Experiment</h2>
+        
+        <div class="experiment-box">
+            <h3 style="margin-top: 0;">Background & Purpose</h3>
+            <p>Navigating the compliance landscape is often complex and difficult. Traditional GRC platforms are sophisticated but clunky, creating barriers to quick learning and practical application. Meanwhile, LLM models without proper instruction suffer from the classic "garbage in = garbage out" problem—they lack regulatory grounding and can produce unreliable guidance.</p>
+            
+            <p><strong>This is an experiment:</strong> What happens when you combine authoritative legal texts with clear, structured instructions? EU GRC Assist is simply a GPT trained on actual regulatory documents with precise governance reasoning rules. The goal is to help students and industry professionals learn and navigate EU compliance requirements more effectively.</p>
+            
+            <h3>AI Governance Principles (AIGP Applied to EU GRC Assist)</h3>
+            <ul style="font-size: 0.85rem; margin-top: 0.75rem;">
+                <li><strong>Human-Centric & Ethical:</strong> Designed to augment, not replace, human judgment. Explicitly states boundaries and limitations. Outputs are drafts requiring professional review.</li>
+                
+                <li><strong>Transparency & Explainability:</strong> Clear instruction summary available via "Audit Full Instruction" button. Citations required for all regulatory references. Governance reasoning flow explained upfront.</li>
+                
+                <li><strong>Accountability:</strong> Every response includes disclaimer. Users informed that outputs are not legal advice and require human oversight. Clear statement that GPT does not approve compliance.</li>
+                
+                <li><strong>Fairness & Non-Discrimination:</strong> Risk-based and proportionate approach. Treats all entity types fairly according to regulatory expectations. No bias toward specific vendors or solutions.</li>
+                
+                <li><strong>Safety, Security & Robustness:</strong> Regulatory humility embedded in design. States "Insufficient coverage" when sources lack clarity. Includes supervisory challenge anticipation to identify potential weaknesses.</li>
+                
+                <li><strong>Privacy-Enhanced:</strong> No personal data processed. All examples and scenarios use generic, anonymized contexts. No storage of user queries beyond ChatGPT's standard retention.</li>
+                
+                <li><strong>Continuous Monitoring:</strong> Community feedback mechanism for reporting issues, requesting improvements, and identifying gaps in regulatory coverage. Iterative refinement based on real-world use.</li>
+            </ul>
+            
+            <p style="margin-top: 1rem; font-weight: 500;">This GPT is a learning experiment in making regulatory compliance more accessible—not a replacement for professional expertise.</p>
+        </div>
+
+        <h2>Community & Feedback</h2>
+        
+        <div class="community-grid">
+            <div class="community-card">
+                <h3 style="margin-top: 0;">💬 Discussion Forum</h3>
+                <p>Join the EU GRC community to discuss compliance challenges, share insights, and learn from other risk professionals working with Dutch and EU regulations.</p>
+                <a href="YOUR_FORUM_LINK_HERE" target="_blank" class="community-button">Visit Forum →</a>
+            </div>
+            
+            <div class="community-card">
+                <h3 style="margin-top: 0;">📝 Submit Feedback</h3>
+                <p>Help improve EU GRC Assist by sharing your experience, reporting issues, suggesting new features, or requesting coverage of additional regulations.</p>
+                <a href="YOUR_FEEDBACK_FORM_LINK_HERE" target="_blank" class="community-button">Give Feedback →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sticky-cta">
+        <a href="YOUR_GPT_LINK_HERE" target="_blank" class="cta-button">Launch EU GRC Assist →</a>
+    </div>
+
+</body>
+</html>
