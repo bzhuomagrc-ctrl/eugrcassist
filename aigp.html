@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIGP Governance Principles — EU GRC Assist</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: #fefbf6;
+            color: #1a1a1a;
+            line-height: 1.5;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #ea580c;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #dc2626;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #0a0a0a;
+        }
+
+        .page-meta {
+            font-size: 0.8rem;
+            color: #78716c;
+            margin-bottom: 1.75rem;
+        }
+
+        .intro-box {
+            background: white;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #ea580c;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .intro-box p {
+            font-size: 0.875rem;
+            color: #334155;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .intro-box p + p {
+            margin-top: 0.75rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 2rem 0 0.5rem 0;
+            color: #0f172a;
+            border-bottom: 2px solid #ea580c;
+            padding-bottom: 0.4rem;
+        }
+
+        .principle-card {
+            background: white;
+            border: 1px solid #fed7aa;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .principle-header {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            background: #ea580c;
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .principle-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .principle-card p {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.6;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .principle-card .how-applied {
+            font-size: 0.8rem;
+            color: #78716c;
+            font-style: italic;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #f0ebe4;
+        }
+
+        .source-note {
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e0db;
+        }
+
+        .source-note p {
+            font-size: 0.8rem;
+            color: #78716c;
+            margin: 0;
+        }
+
+        .source-note a {
+            color: #ea580c;
+            text-decoration: none;
+        }
+
+        .source-note a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <a href="index.html" class="back-link">← Back to EU GRC Assist</a>
+
+        <h1>AIGP AI Governance Principles</h1>
+        <p class="page-meta">As applied to EU GRC Assist — Reference document</p>
+
+        <div class="intro-box">
+            <p>EU GRC Assist is designed and constrained according to the IAPP AI Governance Professional (AIGP) framework. This page documents how each principle is operationalised within the GPT — not as a claim of full compliance, but as a transparent record of the design decisions made and why.</p>
+            <p>Each principle below describes the intent, how it is built into the GPT's behaviour, and where the user remains responsible for applying their own judgment.</p>
+        </div>
+
+        <h2>Governance Principles Applied</h2>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">01</span>
+                <span class="principle-title">Human-Centric & Ethical</span>
+            </div>
+            <p>The GPT is designed to support human decision-making, not substitute it. Every output is framed as a draft — a starting point for professional review, not a final position.</p>
+            <p class="how-applied">In practice: Outputs explicitly state they are drafts. The GPT does not approve compliance or issue binding recommendations. Users are reminded at every interaction that professional judgment is required.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">02</span>
+                <span class="principle-title">Transparency & Explainability</span>
+            </div>
+            <p>The GPT's reasoning process is visible. Users can see how it classifies entities, determines regulatory scope, and arrives at its outputs. The full system instruction is available for audit.</p>
+            <p class="how-applied">In practice: Mandatory citation of regulation name, article, and excerpt. Governance reasoning flow is documented step by step. "Audit Full Instruction" is available on the main page.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">03</span>
+                <span class="principle-title">Accountability</span>
+            </div>
+            <p>Clear boundaries exist around what the GPT can and cannot do. Responsibility for compliance decisions remains with the user and their organisation's legal and risk teams.</p>
+            <p class="how-applied">In practice: Every response ends with a disclaimer. The GPT explicitly states it does not approve compliance. Scope and limitations are surfaced at the start of the documentation, not buried at the end.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">04</span>
+                <span class="principle-title">Fairness & Non-Discrimination</span>
+            </div>
+            <p>The GPT applies a consistent, risk-based and proportionate approach across all entity types. It does not favour particular institutions, vendors, or interpretations without regulatory basis.</p>
+            <p class="how-applied">In practice: Entity classification follows a structured taxonomy. Proportionality is assessed based on regulatory expectations, not assumptions. No vendor-specific guidance is provided.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">05</span>
+                <span class="principle-title">Safety, Security & Robustness</span>
+            </div>
+            <p>The GPT is designed to fail safely. When it does not have sufficient information to answer reliably, it says so explicitly rather than generating plausible-sounding but ungrounded output.</p>
+            <p class="how-applied">In practice: States "Insufficient coverage" when source documents lack clarity. Includes supervisory challenge anticipation — flagging where controls may be questioned. Conservative interpretations are preferred over expansive ones.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">06</span>
+                <span class="principle-title">Privacy-Enhanced</span>
+            </div>
+            <p>The GPT does not process, store, or request personal data. All examples and scenarios use generic, anonymised contexts to avoid creating privacy risks for users or the entities they work for.</p>
+            <p class="how-applied">In practice: No personal or entity-specific data is required to use the GPT. Query retention follows ChatGPT's standard policies. Users are advised not to input confidential or personally identifiable information.</p>
+        </div>
+
+        <div class="principle-card">
+            <div class="principle-header">
+                <span class="principle-number">07</span>
+                <span class="principle-title">Continuous Monitoring</span>
+            </div>
+            <p>The GPT is not a finished product. It is designed to be refined over time based on feedback, regulatory updates, and observed gaps in coverage.</p>
+            <p class="how-applied">In practice: Contact channel is available for reporting issues or suggesting improvements. Regulatory scope is periodically reviewed. Version changes are tracked through the documentation on the main page.</p>
+        </div>
+
+        <div class="source-note">
+            <p>Reference: IAPP AI Governance Professional (AIGP) certification framework. For the full AIGP body of knowledge, visit <a href="https://iapp.org" target="_blank">iapp.org</a>.</p>
+            <p style="margin-top: 0.4rem;">Questions about this page? Contact <a href="mailto:bzhuoma.grc@gmail.com">bzhuoma.grc@gmail.com</a></p>
+        </div>
+
+    </div>
+
+</body>
+</html>
